@@ -43,7 +43,7 @@ class Watch():
                 self.minutes += 1
                 self.seconds = 0   
             self.timelabel.config(text = str(self.minutes) + " : " + str(self.seconds) + " : " + str(self.milliseconds))
-            time.sleep(0.01)
+            time.sleep(0.005)
             self.root.update()
 
     def stop_clock(self, exists=False, timer=None):
