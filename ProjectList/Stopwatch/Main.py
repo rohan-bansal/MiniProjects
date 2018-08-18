@@ -37,12 +37,16 @@ class Watch():
                 break
             self.milliseconds += 1
             if(self.milliseconds == 100):
-                self.seconds += 1
+                self.seconds = int(self.seconds) + 1
                 self.milliseconds = 0
-            if(self.seconds == 60):
-                self.minutes += 1
-                self.seconds = 0   
-            self.timelabel.config(text = str(self.minutes) + " : " + str(self.seconds) + " : " + str(self.milliseconds))
+            if(int(self.seconds) == 60):
+                self.minutes = int(self.minutes) + 1
+                self.seconds = 0  
+            if(len(str(self.minutes)) != 2):
+                self.minutes = "0" + str(self.minutes)
+            if(len(str(self.seconds)) != 2):
+                self.seconds = "0" + str(self.seconds)
+            self.timelabel.config(text = self.minutes + " : " + str(self.seconds) + " : " + str(self.milliseconds))
             time.sleep(0.005)
             self.root.update()
 
@@ -57,11 +61,11 @@ class Watch():
         else:
             self.stoptheclock = 1
 
-    def reset_clock(self):
+    def reset_stopwatch(self):
         self.milliseconds = 0
         self.seconds = 0
         self.minutes = 0            
-        self.timelabel.config(text = str(self.minutes) + " : " + str(self.seconds) + " : " + str(self.milliseconds))
+        self.timelabel.config(text = "00 : 00 : 00")
         self.root.update()
 
     def TimerSet(self):
@@ -131,7 +135,7 @@ class Watch():
                 pygame.mixer.music.play()
 
 def StopwatchB1():
-    display = tk.Label(window, text = "0 : 0 : 0", font=("Comic Sans", 44))
+    display = tk.Label(window, text = "00 : 00 : 00", font=("Comic Sans", 44))
     display.place(relx = 0.5, rely = 0.4, anchor = "center")
     stopwatch = Watch(window, display)
 
@@ -139,7 +143,7 @@ def StopwatchB1():
     pause.place(x = 140, y = 200)
     start = tk.Button(window, text = "START", width = 10, height = 1, command = stopwatch.start_stopwatch)
     start.place(x = 140,y = 230)
-    reset = tk.Button(window, text = "RESET", width = 10, height = 1, command = stopwatch.reset_clock)
+    reset = tk.Button(window, text = "RESET", width = 10, height = 1, command = stopwatch.reset_stopwatch)
     reset.place(x = 140, y = 260)
 
 def TimerB1():
