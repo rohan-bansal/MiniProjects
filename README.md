@@ -1,2 +1,2 @@
 # MiniProjects
-A collection of my smaller side projects.
+A collection of useful, smaller side projects.
